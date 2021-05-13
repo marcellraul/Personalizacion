@@ -22,11 +22,12 @@ export class ShapeEditorComponent implements OnInit {
   shapes: Shape[];
   currentShape = new BehaviorSubject<Shape>(null);
 
-  findShape = (x) => (x < 0 ? 1 : x + 1);
+  findShape = (x: any) => (x < 0 ? 1 : x + 1);
 
   ngOnInit() {
-    // // invoke the shape service
-    // this.shapes = this.shapeService.getShapes();
+    // invoke the shape service
+    this.shapes = this.shapeService.getShapes();
+
     // // when current shape changes, navigate the router
     // this.currentShape.subscribe((shape) =>
     //   this.router.navigate([
@@ -34,9 +35,10 @@ export class ShapeEditorComponent implements OnInit {
     //     this.findShape(this.shapes.findIndex((sh) => sh == shape)),
     //   ])
     // );
+
     // // when the route changes, change currentShape
     // this.route.params
-    //   .pipe((p: any) => p.id)
-    //   .subscribe((id: any) => this.currentShape.next(this.shapes[id - 1]));
+    //   .map((p) => p.id)
+    //   .subscribe((id) => this.currentShape.next(this.shapes[id - 1]));
   }
 }

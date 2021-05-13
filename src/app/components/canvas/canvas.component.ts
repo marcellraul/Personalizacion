@@ -33,6 +33,7 @@ export class CanvasComponent implements OnInit {
 
   setType(type: string) {
     this.shapeType = type;
+    console.log(this.shapeType);
   }
   startDrawing(evt: MouseEvent) {
     this.createdShape = {
@@ -42,27 +43,21 @@ export class CanvasComponent implements OnInit {
       w: 0,
       h: 0,
     };
-    //this.shapesToDraw.push(this.createdShape);
+    this.shapesToDraw.push(this.createdShape);
+    console.log('shapesdraw', this.shapesToDraw);
   }
 
   keepDrawing(evt: MouseEvent) {
     if (this.createdShape) {
-      //this.currentShape.next(this.createdShape);
+      this.currentShape.next(this.createdShape);
       this.createdShape.w = evt.offsetX - this.createdShape.x;
       this.createdShape.h = evt.offsetY - this.createdShape.y;
-      // console.log(this.createdShape);
-      // console.log(this.currentShape);
     }
+    // console.log(this.currentShape);
+    // console.log(this.createdShape);
   }
 
   stopDrawing(evt: MouseEvent) {
     this.createdShape = null;
-  }
-
-  typeChanged() {
-    this.type;
-    console.log(this.type);
-    // this.onTypeChange.emit(this.type);
-    // console.log(this.onTypeChange.emit(this.type));
   }
 }
