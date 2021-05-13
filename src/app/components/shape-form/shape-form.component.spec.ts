@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SignaturePadComponent } from './signature-pad.component';
+import { ShapeFormComponent } from './shape-form.component';
 
-describe('SignaturePadComponent', () => {
-  let component: SignaturePadComponent;
-  let fixture: ComponentFixture<SignaturePadComponent>;
+describe('ShapeFormComponent', () => {
+  let component: ShapeFormComponent;
+  let fixture: ComponentFixture<ShapeFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SignaturePadComponent ]
+      declarations: [ ShapeFormComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SignaturePadComponent);
+    fixture = TestBed.createComponent(ShapeFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

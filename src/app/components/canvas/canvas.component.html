@@ -1,1 +1,16 @@
-<h1>hola</h1>
+<div class="container">
+    <div class="form-group">
+        <label> Create </label>
+        <select (change)="typeChanged()" [(ngModel)]="type" class="form-control">
+            <option value="rectangle">Rectangle</option>
+            <option value="line">Line</option>
+            <option value="ellipse">Ellipse</option>
+        </select>
+
+    </div>
+
+    <div class="shapeCanvas" (mousedown)="startDrawing($event)" (mouseup)="stopDrawing($event)"
+        (mousemove)="keepDrawing($event)">
+
+    </div>
+</div>
