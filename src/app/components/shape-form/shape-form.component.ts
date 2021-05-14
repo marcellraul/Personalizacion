@@ -23,4 +23,10 @@ export class ShapeFormComponent implements OnInit {
   shapeChanged(e: Event) {
     this.editedShape.next(this.localCurrent);
   }
+
+  Delete(i) {
+    this.shapesToEdit.splice(i, 1);
+    console.log(i);
+    console.log(this.shapesToEdit);
+  }
 }

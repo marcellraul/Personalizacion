@@ -1,5 +1,34 @@
 <div class="mt-4">
-    <select (change)="shapeChanged($event)" [(ngModel)]="localCurrent" size="5">
-        <option *ngFor="let shape of shapesToEdit" [ngValue]="shape">{{shape|json}} </option>
-    </select>
+
+    <!-- <div class="list-group">
+        <a *ngFor="let shape of shapesToEdit" class="list-group-item list-group-item-action list-group-item-primary"
+            [ngValue]="shape"> {{shape|json}} </a>
+        <a class="list-group-item list-group-item-action list-group-item-success">A simple success list group item</a>
+        <a class="list-group-item list-group-item-action list-group-item-dark">A simple dark list group item</a>
+    </div> -->
+
+    <table class="table table-striped table-hover mt-4">
+        <thead class="thead-light  ">
+            <tr>
+                <th scope="col">Type</th>
+                <th scope="col">X</th>
+                <th scope="col">y</th>
+                <th scope="col">w</th>
+                <th scope="col">h</th>
+                <th scope="col">Options</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let shape of shapesToEdit; index as i ">
+                <th>{{shape.type}}</th>
+                <td>{{shape.x}}</td>
+                <td>{{shape.y}}</td>
+                <td>{{shape.w}}</td>
+                <td>{{shape.h}}</td>
+                <td (click)="Delete(i)" class="material-icons hover"> delete</td>
+            </tr>
+
+        </tbody>
+    </table>
 </div>

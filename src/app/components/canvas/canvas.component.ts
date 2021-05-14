@@ -43,6 +43,8 @@ export class CanvasComponent implements OnInit {
       w: 0,
       h: 0,
     };
+    if (this.createdShape.w > 1) {
+    }
     this.shapesToDraw.push(this.createdShape);
     console.log('shapesdraw', this.shapesToDraw);
   }

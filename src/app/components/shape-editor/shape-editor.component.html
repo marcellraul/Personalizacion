@@ -1,7 +1,13 @@
 <div class="mt-4 container ">
-    <div class="container">
-        <h1>Shape Editor</h1>
-        <app-canvas [shapesToDraw]="shapes" [currentShape]="currentShape"></app-canvas>
-        <app-shape-form [shapesToEdit]="shapes" [editedShape]="currentShape"></app-shape-form>
+    <div class="container row">
+        <div class="col-6">
+
+            <h1>Shape Editor</h1>
+            <app-canvas [shapesToDraw]="shapes" [currentShape]="currentShape"></app-canvas>
+        </div>
+        <div class="col-6">
+
+            <app-shape-form [shapesToEdit]="shapes" [editedShape]="currentShape"></app-shape-form>
+        </div>
     </div>
 </div>
