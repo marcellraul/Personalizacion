@@ -21,6 +21,7 @@ export class CanvasComponent implements OnInit {
 
   constructor() {}
   shapeType = 'rectangle';
+  urlImage: string = 'assets/images/98_original.png';
 
   @Output() onTypeChange = new EventEmitter<string>();
   @Input() shapesToDraw: Shape[];
@@ -43,8 +44,7 @@ export class CanvasComponent implements OnInit {
       w: 0,
       h: 0,
     };
-    if (this.createdShape.w > 1) {
-    }
+
     this.shapesToDraw.push(this.createdShape);
     console.log('shapesdraw', this.shapesToDraw);
   }
@@ -61,5 +61,6 @@ export class CanvasComponent implements OnInit {
 
   stopDrawing(evt: MouseEvent) {
     this.createdShape = null;
+    console.log('stopdrawing');
   }
 }

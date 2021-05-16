@@ -12,8 +12,8 @@ import { ShapeFormComponent } from './shape-form/shape-form.component';
 import { ShapeTypeComponent } from './shape-type/shape-type.component';
 
 const appRoutes: Routes = [
-  { path: 'shape/:id', component: ShapeEditorComponent },
-  { path: '', redirectTo: '/shape/1', pathMatch: 'full' },
+  { path: 'shape', component: ShapeEditorComponent },
+  { path: '', redirectTo: '/shape', pathMatch: 'full' },
 ];
 
 @NgModule({
