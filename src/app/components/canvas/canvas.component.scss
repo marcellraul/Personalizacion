@@ -13,3 +13,13 @@
   stroke: black;
   stroke-width: 1;
 }
+
+.cursor :hover {
+  cursor: crosshair;
+}
+
+.border {
+  border: 2px solid green !important;
+  width: auto;
+  height: 600px;
+}
