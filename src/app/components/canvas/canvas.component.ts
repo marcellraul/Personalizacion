@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Shape } from '../../services/shape';
 import { Subject } from 'rxjs';
@@ -25,7 +17,6 @@ export class CanvasComponent implements OnInit {
   urlImage2: string =
     'https://holatelcel.com/wp-content/uploads/2021/01/Deadpool-Marvel-696x696.png';
 
-  @Output() onTypeChange = new EventEmitter<string>();
   @Input() shapesToDraw: Shape[];
   @Input() currentShape: Subject<Shape>;
 
@@ -36,8 +27,9 @@ export class CanvasComponent implements OnInit {
 
   setType(type: string) {
     this.shapeType = type;
-    console.log(this.shapeType);
+    //console.log(this.shapeType);
   }
+
   startDrawing(evt: MouseEvent) {
     this.createdShape = {
       type: this.shapeType,
@@ -63,6 +55,11 @@ export class CanvasComponent implements OnInit {
 
   stopDrawing(evt: MouseEvent) {
     this.createdShape = null;
-    console.log('stopdrawing');
+    //console.log('stopdrawing');
+  }
+
+  Delete(i) {
+    this.shapesToDraw.splice(i, 1);
+    console.log(this.shapesToDraw);
   }
 }
