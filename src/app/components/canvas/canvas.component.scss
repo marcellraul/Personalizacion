@@ -10,10 +10,14 @@
 
 .shape {
   fill-opacity: 0;
-  stroke: black;
+  stroke: green;
   stroke-width: 1;
+  cursor: move;
 }
 
+.shape:hover {
+  cursor: move;
+}
 .cursor :hover {
   cursor: crosshair;
 }

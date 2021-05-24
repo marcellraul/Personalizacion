@@ -14,8 +14,7 @@ export class CanvasComponent implements OnInit {
   constructor() {}
   shapeType = 'rectangle';
   urlImage: string = 'assets/images/98_original.png';
-  urlImage2: string =
-    'https://holatelcel.com/wp-content/uploads/2021/01/Deadpool-Marvel-696x696.png';
+  urlImage2: string = 'assets/images/98_original.png';
 
   @Input() shapesToDraw: Shape[];
   @Input() currentShape: Subject<Shape>;
