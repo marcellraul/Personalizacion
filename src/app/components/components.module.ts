@@ -7,14 +7,21 @@ import { ShapeEditorComponent } from './shape-editor/shape-editor.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ShapeService } from '../services/shape.service';
 import { CanvasJsComponent } from './canvas-js/canvas-js.component';
+import { AutomatizacionComponent } from './automatizacion/automatizacion.component';
 
 const appRoutes: Routes = [
   { path: 'shape', component: ShapeEditorComponent },
+  { path: 'roi&lc', component: AutomatizacionComponent },
   { path: '', redirectTo: '/shape', pathMatch: 'full' },
 ];
 
 @NgModule({
-  declarations: [CanvasComponent, ShapeEditorComponent, CanvasJsComponent],
+  declarations: [
+    CanvasComponent,
+    ShapeEditorComponent,
+    CanvasJsComponent,
+    AutomatizacionComponent,
+  ],
   imports: [
     CommonModule,
     CanvasWhiteboardModule,
@@ -26,7 +33,12 @@ const appRoutes: Routes = [
       } // <-- debugging purposes only
     ),
   ],
-  exports: [CanvasComponent, ShapeEditorComponent, CanvasJsComponent],
+  exports: [
+    CanvasComponent,
+    ShapeEditorComponent,
+    CanvasJsComponent,
+    AutomatizacionComponent,
+  ],
   providers: [ShapeService],
 })
 export class ComponentsModule {}
