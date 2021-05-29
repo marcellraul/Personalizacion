@@ -8,10 +8,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { ShapeService } from '../services/shape.service';
 import { CanvasJsComponent } from './canvas-js/canvas-js.component';
 import { AutomatizacionComponent } from './automatizacion/automatizacion.component';
+import { PoligonoComponent } from './poligono/poligono.component';
 
 const appRoutes: Routes = [
   { path: 'shape', component: ShapeEditorComponent },
   { path: 'roi&lc', component: AutomatizacionComponent },
+  { path: 'poligono', component: PoligonoComponent },
+
   { path: '', redirectTo: '/shape', pathMatch: 'full' },
 ];
 
@@ -21,6 +24,7 @@ const appRoutes: Routes = [
     ShapeEditorComponent,
     CanvasJsComponent,
     AutomatizacionComponent,
+    PoligonoComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +42,7 @@ const appRoutes: Routes = [
     ShapeEditorComponent,
     CanvasJsComponent,
     AutomatizacionComponent,
+    PoligonoComponent,
   ],
   providers: [ShapeService],
 })
