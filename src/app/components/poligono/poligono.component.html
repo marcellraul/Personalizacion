@@ -1,5 +1,8 @@
 <div class="container mt-4">
     <div class="row">
-        <div class="col">hola </div>
+        <svg height="500" width="100%" (mouseup)="handleMouseUp($event)" (mousemove)="handleMouseMove($event)"></svg>
+        <pre>
+          {{shapes | json}}
+        </pre>
     </div>
 </div>
