@@ -10,6 +10,11 @@ import { CanvasJsComponent } from './canvas-js/canvas-js.component';
 import { AutomatizacionComponent } from './automatizacion/automatizacion.component';
 import { PoligonoComponent } from './poligono/poligono.component';
 
+import {
+  NgbPaginationModule,
+  NgbAlertModule,
+} from '@ng-bootstrap/ng-bootstrap';
+
 const appRoutes: Routes = [
   { path: 'shape', component: ShapeEditorComponent },
   { path: 'roi&lc', component: AutomatizacionComponent },
@@ -36,6 +41,8 @@ const appRoutes: Routes = [
         /*enableTracing: true */
       } // <-- debugging purposes only
     ),
+    NgbPaginationModule,
+    NgbAlertModule,
   ],
   exports: [
     CanvasComponent,

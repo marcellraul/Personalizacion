@@ -21,8 +21,15 @@
         </div>
     </div>
     <div class="row mt-2">
-        <div class="col-6">
-            <canvas #canvas width="600" height="600" (click)="click($event)"></canvas>
+        <div class="col-12 ">
+            <canvas #canvas (click)="click($event)"></canvas>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-7">
+            <ngb-alert *ngIf="alert" [dismissible]="true">
+                <strong>La direccion debe intersectar a la linea</strong>
+            </ngb-alert>
         </div>
     </div>
 </div>

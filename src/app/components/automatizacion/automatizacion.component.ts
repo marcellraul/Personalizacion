@@ -18,6 +18,9 @@ export class AutomatizacionComponent implements OnInit {
   nombreAnalitica = '';
   queDibujar = 'Roi';
   loading: false;
+  alert: boolean = false;
+  urlImage2: string = 'assets/images/98_original.png';
+
   //Lista de coordendas y nombres y todas las analiticas guardadas
   Analiticas = [];
   constructor() {}
@@ -28,15 +31,21 @@ export class AutomatizacionComponent implements OnInit {
     const image = new Image();
     image.src = 'https://podcast.duolingo.com/images/spanish/Episode%2011.jpeg';
     image.onload = () => {
-      this.canvas.nativeElement.width = 600;
-      this.canvas.nativeElement.height = 600;
+      this.canvas.nativeElement.width = image.width;
+      this.canvas.nativeElement.height = image.height;
       this.context.drawImage(image, 0, 0);
       this.context.beginPath();
     };
   }
 
   public click(event) {
+    this.LineCrossing(event);
+    this.ROI(event);
+  }
+
+  LineCrossing(event) {
     if (this.queDibujar == 'Line') {
+      this.alert = false;
       this.context.lineWidth = 5;
       this.context.lineJoin = 'round';
       this.context.beginPath();
@@ -71,24 +80,36 @@ export class AutomatizacionComponent implements OnInit {
           this.ListLineCrossing[1].y
         );
       } else if (this.ListLineCrossing.length == 4) {
-        this.context.moveTo(
-          this.ListLineCrossing[0].x,
-          this.ListLineCrossing[0].y
-        );
-        this.context.lineTo(
-          this.ListLineCrossing[1].x,
-          this.ListLineCrossing[1].y
-        );
-        this.canvas_arrow(
-          this.context,
-          this.ListLineCrossing[2].x,
-          this.ListLineCrossing[2].y,
-          this.ListLineCrossing[3].x,
-          this.ListLineCrossing[3].y
-        );
+        if (
+          this.seg_intersection(
+            this.ListLineCrossing[0],
+            this.ListLineCrossing[1],
+            this.ListLineCrossing[2],
+            { x: this.coord.x, y: this.coord.y }
+          )
+        ) {
+          this.context.moveTo(
+            this.ListLineCrossing[0].x,
+            this.ListLineCrossing[0].y
+          );
+          this.context.lineTo(
+            this.ListLineCrossing[1].x,
+            this.ListLineCrossing[1].y
+          );
+          this.canvas_arrow(
+            this.context,
+            this.ListLineCrossing[2].x,
+            this.ListLineCrossing[2].y,
+            this.ListLineCrossing[3].x,
+            this.ListLineCrossing[3].y
+          );
+          this.List = [...this.List, [this.ListLineCrossing]];
+          this.ListLineCrossing = [];
+        } else {
+          this.ListLineCrossing.splice(this.LineCrossing.length - 3, 2);
+          this.alert = true;
+        }
 
-        this.List = [...this.List, [this.ListLineCrossing]];
-        this.ListLineCrossing = [];
         console.log('List grande: ', this.List);
       }
       this.context.strokeStyle = '#27AE60';
@@ -113,7 +134,9 @@ export class AutomatizacionComponent implements OnInit {
       //   this.context.stroke();
       // });
     }
+  }
 
+  ROI(event) {
     if (this.queDibujar == 'Roi') {
       this.context.lineWidth = 5;
       this.context.lineJoin = 'round';
@@ -147,7 +170,7 @@ export class AutomatizacionComponent implements OnInit {
   }
 
   canvas_arrow(context, fromx, fromy, tox, toy) {
-    var headlen = 10;
+    var headlen = 20;
     var dx = tox - fromx;
     var dy = toy - fromy;
     var angle = Math.atan2(dy, dx);
@@ -162,5 +185,55 @@ export class AutomatizacionComponent implements OnInit {
       tox - headlen * Math.cos(angle + Math.PI / 6),
       toy - headlen * Math.sin(angle + Math.PI / 6)
     );
+  }
+
+  area_triang(a, b, c) {
+    return (b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y);
+  }
+
+  side_p_to_seg(v1, v2, p) {
+    let area = this.area_triang(v1, v2, p);
+    let lado = '';
+    if (area > 0) lado = 'izq';
+    else if (area < 0) lado = 'der';
+    else lado = 'col';
+    return lado;
+  }
+
+  seg_intersection(u1, u2, v1, v2) {
+    if (
+      this.side_p_to_seg(u1, u2, v1) === 'col' ||
+      this.side_p_to_seg(u1, u2, v2) === 'col' ||
+      this.side_p_to_seg(v1, v2, u1) === 'col' ||
+      this.side_p_to_seg(v1, v2, u2) === 'col'
+    )
+      return false;
+    else if (
+      ((this.side_p_to_seg(u1, u2, v1) === 'izq' &&
+        this.side_p_to_seg(u1, u2, v2) === 'der') ||
+        (this.side_p_to_seg(u1, u2, v1) === 'der' &&
+          this.side_p_to_seg(u1, u2, v2) === 'izq')) &&
+      ((this.side_p_to_seg(v1, v2, u1) === 'der' &&
+        this.side_p_to_seg(v1, v2, u2) === 'izq') ||
+        (this.side_p_to_seg(v1, v2, u1) === 'izq' &&
+          this.side_p_to_seg(v1, v2, u2) === 'der'))
+    )
+      return true;
+    else return false;
+  }
+
+  comprobarInterseccionPoligono(lista, nuevoPunto) {
+    for (var i = 0; i < lista.length - 1; i++)
+      if (
+        this.seg_intersection(
+          lista[i],
+          lista[i + 1],
+          lista[lista.length - 1],
+          nuevoPunto
+        )
+      ) {
+        return true;
+      }
+    return false;
   }
 }
